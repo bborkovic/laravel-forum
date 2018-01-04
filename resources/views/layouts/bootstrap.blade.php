@@ -34,13 +34,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ticket App</a>
+            <a class="navbar-brand" href="#">Forum App</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="/">Home</a></li>
 
-              @if( !Auth::check())
+{{--               @if( !Auth::check())
                @include('layouts.menu-welcome')
               @else
                 @if( Auth::user()->hasRole('customer'))
@@ -50,7 +50,7 @@
                 @elseif( Auth::user()->hasRole('technician') )
                   @include('layouts.menu-technician')
                 @endif
-              @endif
+              @endif --}}
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

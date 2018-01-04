@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Thread;
 
 class CategoryController extends Controller
 {
@@ -14,9 +15,13 @@ class CategoryController extends Controller
    }
 
    public function categorydrill($parent_id) {
+
       $category = Category::find($parent_id);
       $categories = Category::where('parent_id',$parent_id)->get();
-      return view('Category.index', ['categories' => $categories, 'category' => $category ]);
+      $threads = Thread::where('category_id', $parent_id)->orderBy('updated_at','desc')->get();
+      return view('Category.index', ['categories' => $categories, 'category' => $category, 'threads' => $threads]);
+
+
    }
 
    

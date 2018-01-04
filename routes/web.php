@@ -14,6 +14,7 @@
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index');
+Route::get('/', 'CategoryController@index');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/{parent_id}', 'CategoryController@categorydrill');
 
@@ -22,6 +23,7 @@ Route::get('/threads/create/{category_id}', 'ThreadController@showCreateForm');
 Route::post('/threads/create/{category_id}', 'ThreadController@create');
 
 Route::get('/replies/create/{thread_id}', 'ReplyController@showCreateForm');
+Route::post('/replies/create/{thread_id}', 'ReplyController@create');
 
 // Route::get('/tickets', 'TicketController@index');
 // Route::get('/tickets/create', 'TicketController@showCreateForm');

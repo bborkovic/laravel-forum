@@ -8,24 +8,30 @@
       @foreach( $replies as $reply )
       <tr>
       <div class="panel panel-info">
-         <div class="panel-heading">{{$reply->created_at->diffForHumans()}}</div>
+         {{-- <div class="panel-heading">{{$reply->created_at->diffForHumans()}}</div> --}}
+         <div class="panel-heading">{{$reply->created_at}}</div>
          <div class="panel-body">
             <div class="row">
-               <div class="col-md-2">
-                  {{$reply->user['name']}}
-{{--                   <div class="panel panel-default">
-                     <div class="panel-body">
-                        {{$reply->created_at}}
-                     </div>
-                  </div> --}}
+               <div class="col-sm-3">
+                  {{-- {{$reply->user['name']}} --}}
+                  {{$reply->username}}
                </div>
-               <div class="col-md-10">
-                  {{$reply->body}}
-{{--                   <div class="panel panel-default">
-                     <div class="panel-body">
-                        {{$reply->body}}
-                     </div>
-                  </div> --}}
+               <div class="col-sm-9">
+                  <div class="row">{{$reply->body}}</div>
+               </div>
+            </div>
+         </div>
+         <div class="panel-footer">
+            <div class="row">
+               <div class="col-sm-12" text-right>
+                  <div class="pull-right">
+                     <button type="button" class="btn btn-default btn-sm">
+                        <a href="like"<span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                     </button>
+                     <button type="button" class="btn btn-default btn-sm">
+                        <a href="like"<span class="glyphicon glyphicon-thumbs-down"></span>Dislike</a>
+                     </button>
+                  </div>
                </div>
             </div>
          </div>
