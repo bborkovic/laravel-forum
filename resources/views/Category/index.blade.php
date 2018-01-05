@@ -25,7 +25,9 @@
          <div class="col-sm-4">
             <ul>
                @foreach($threads as $thread)
-                  <li><a href="/threads/{{$thread->id}}">{{ $thread->name }}</a></li>
+                  <li>
+                     <a href="/threads/{{$thread->id}}">{{ $thread->name }} ({{ $thread->replies }})</a>
+                  </li>
                @endforeach
             </ul>
          </div>

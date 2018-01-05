@@ -20,11 +20,7 @@ class ThreadController extends Controller
 
    public function show($thread_id) {
       $thread = Thread::find($thread_id);
-      // $replies = $thread->replies()->with('user')->get();
-      $replies = DB::select('select rownum, r.* from ( select r.*, u.name as username from replies r, users u where u.id = r.user_id and thread_id = ? order by r.created_at ) r' , [ $thread_id ]);
-      // $replies = Reply::where('thread_id',$thread->id)->orderBy('created_at','asc')->with('user')->get();
-      // dd($replies->first()->user->name);
-      // -->replies()->with('user')->get();
+      $replies = $thread->replies()->orderBy('created_at','asc')->with('user')->paginate(5);
       return view('Thread.show', ['thread' => $thread, 'replies' => $replies] );
    }
 

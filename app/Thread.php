@@ -21,5 +21,10 @@ class Thread extends Model
       return $this->hasMany('App\Reply');
    }
 
+   public function increment_replies() {
+      $this->replies = $this->replies+1;
+      $this->save();
+   }
+
 
 }

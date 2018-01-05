@@ -8,13 +8,14 @@
       @foreach( $replies as $reply )
       <tr>
       <div class="panel panel-info">
-         {{-- <div class="panel-heading">{{$reply->created_at->diffForHumans()}}</div> --}}
-         <div class="panel-heading">{{$reply->created_at}}</div>
+         <div class="panel-heading">
+            {{$reply->rn}}. {{$reply->created_at->diffForHumans()}}
+         </div>
          <div class="panel-body">
             <div class="row">
                <div class="col-sm-3">
                   {{-- {{$reply->user['name']}} --}}
-                  {{$reply->username}}
+                  {{$reply->user->name}}
                </div>
                <div class="col-sm-9">
                   <div class="row">{{$reply->body}}</div>
@@ -26,10 +27,10 @@
                <div class="col-sm-12" text-right>
                   <div class="pull-right">
                      <button type="button" class="btn btn-default btn-sm">
-                        <a href="like"<span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                        <a href="/replies/{{$reply->id}}/like"<span class="glyphicon glyphicon-thumbs-up"></span> {{$reply->likes}}</a>
                      </button>
                      <button type="button" class="btn btn-default btn-sm">
-                        <a href="like"<span class="glyphicon glyphicon-thumbs-down"></span>Dislike</a>
+                        <a href="/replies/{{$reply->id}}/dislike"<span class="glyphicon glyphicon-thumbs-down"></span> {{$reply->dislikes}}</a>
                      </button>
                   </div>
                </div>
@@ -41,7 +42,14 @@
    </table>
 
    {{-- Bla Bla Bla --}}
-   <a href="/replies/create/{{$thread->id}}" class="btn btn-primary" role="button">Reply</a
+   <div class="pull-center">
+      {{$replies->links()}}
+   </div>
 
+   <a href="/replies/create/{{$thread->id}}" class="btn btn-primary" role="button">Reply</a>
+   
+   
+
+   
 
 @endsection
