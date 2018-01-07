@@ -14,8 +14,8 @@ class AddColumnsToRepliesTable extends Migration
     public function up()
     {
        Schema::table('replies', function($table) {
-           $table->integer('likes')->nullable();
-           $table->integer('dislikes')->nullable();
+           $table->integer('likes')->default(0);
+           $table->integer('dislikes')->default(0);
        });
     }
 

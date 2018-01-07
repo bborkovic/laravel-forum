@@ -26,12 +26,13 @@
             <div class="row">
                <div class="col-sm-12" text-right>
                   <div class="pull-right">
-                     <button type="button" class="btn btn-default btn-sm">
-                        <a href="/replies/{{$reply->id}}/like"<span class="glyphicon glyphicon-thumbs-up"></span> {{$reply->likes}}</a>
+                     <button type="button" class="btn btn-default btn-sm like-button" id="like_{{$reply->id}}">
+                        <span class="glyphicon glyphicon-thumbs-up">{{$reply->likes}}</span>
                      </button>
-                     <button type="button" class="btn btn-default btn-sm">
-                        <a href="/replies/{{$reply->id}}/dislike"<span class="glyphicon glyphicon-thumbs-down"></span> {{$reply->dislikes}}</a>
+                     <button type="button" class="btn btn-default btn-sm dislike-button" id="dislike_{{$reply->id}}">
+                        <span class="glyphicon glyphicon-thumbs-up">{{$reply->dislikes}}</span>
                      </button>
+
                   </div>
                </div>
             </div>
@@ -48,8 +49,32 @@
 
    <a href="/replies/create/{{$thread->id}}" class="btn btn-primary" role="button">Reply</a>
    
-   
+@endsection
 
-   
 
+
+@section('javascript')
+   <script type="text/javascript">
+      $('.like-button').click(function(el) {
+         self = this;
+         div_id = this.id;
+         reply_id = div_id.replace('like_','');
+         $.get("/replies/" + reply_id + "/like", function(data, status){
+            console.log('New likes: ' + data.likes);
+            $('#' + div_id)[0].innerHTML = '<span class="glyphicon glyphicon-thumbs-up">' + data.likes + '</span>';
+         });
+      });
+
+      $('.dislike-button').click(function(el) {
+         self = this;
+         div_id = this.id;
+         reply_id = div_id.replace('dislike_','');
+         $.get("/replies/" + reply_id + "/dislike", function(data, status){
+            console.log('New dislikes: ' + data.dislikes);
+            console.log(div_id);
+            $('#' + div_id)[0].innerHTML = '<span class="glyphicon glyphicon-thumbs-up">' + data.dislikes + '</span>';
+         });
+      });
+
+   </script>
 @endsection

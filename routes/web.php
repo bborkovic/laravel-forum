@@ -29,6 +29,9 @@ Route::post('/replies/create/{thread_id}', 'ReplyController@create');
 Route::get('/replies/{reply_id}/like', 'LikeController@like');
 Route::get('/replies/{reply_id}/dislike', 'LikeController@dislike');
 
+// Route::get('/api/likes/{reply_id}', 'LikeController@likes');
+// Route::get('/api/getlikes/{reply_id}', 'LikeController@getLikes');
+
 // Route::get('/tickets', 'TicketController@index');
 // Route::get('/tickets/create', 'TicketController@showCreateForm');
 // Route::post('/tickets/create', 'TicketController@create');
