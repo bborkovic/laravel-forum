@@ -29,6 +29,8 @@ Route::post('/replies/create/{thread_id}', 'ReplyController@create');
 Route::get('/replies/{reply_id}/like', 'LikeController@like');
 Route::get('/replies/{reply_id}/dislike', 'LikeController@dislike');
 
+//ako je tome tako onda to bas i nije bitno da se vidi
+
 // Route::get('/api/likes/{reply_id}', 'LikeController@likes');
 // Route::get('/api/getlikes/{reply_id}', 'LikeController@getLikes');
 

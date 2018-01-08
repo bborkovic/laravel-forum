@@ -16,4 +16,11 @@ class Like extends Model
    public function user() {
       return $this->belongsTo('App\User');
    }
+
+   public static function userAlreadyLiked($user_id, $reply_id) {
+      if (static::where('user_id',$user_id)->where('reply_id',$reply_id)->get()->count() > 0) {
+         return true;
+      }
+      return false;
+   }
 }

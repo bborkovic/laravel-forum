@@ -26,5 +26,4 @@ class Thread extends Model
       $this->save();
    }
 
-
 }

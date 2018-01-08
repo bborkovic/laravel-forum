@@ -13,7 +13,7 @@ class LikeController extends Controller
    public function __construct() {
       // comment
       // $this->middleware('auth', ['except' => ['likes']]);
-      $this->middleware('auth', ['only' => ['likes']]);
+      $this->middleware('auth');
    }
 
    public function getLikes( $reply_id ) {
@@ -27,23 +27,17 @@ class LikeController extends Controller
       // ]);
    }
 
-   public function likes() {
-      return response()->json([
-         'user' => Auth::user()->name,
-         'name' => 'Abigail',
-         'state' => 'CA'
-      ]);
-   }
-   
    public function like($reply_id) {
       $user_id = Auth::user()->getId();
-      // return current likes if already liked by this user
-      // if( Like::where('user_id',$user_id)->where('reply_id',$reply_id)->get()->count() > 0) { 
-      //    return response()->json([
-      //       'likes' => Reply::find($reply_id)->likes,
-      //    ]);
-      // }
-      // else increment likes ...
+
+      // check if already liked
+      if( Like::userAlreadyLiked($user_id, $reply_id) ) { 
+         return response()->json([
+            'likes' => Reply::find($reply_id)->likes,
+            'status' => 'Not liked, already liked!',
+         ]);
+      }
+      // else increment likes and return incremented value
       $like = new Like([
          "user_id" => $user_id,
          "reply_id" => $reply_id,
@@ -55,18 +49,19 @@ class LikeController extends Controller
       $like->reply->save();
       return response()->json([
          'likes' => $nr_of_likes,
+         'status' => 'Liked!',
       ]);
    }
 
    public function dislike($reply_id) {
       $user_id = Auth::user()->getId();
       // return current likes if already liked by this user
-      // if( Like::where('user_id',$user_id)->where('reply_id',$reply_id)->get()->count() > 0) { 
-      //    return response()->json([
-      //       'dislikes' => Reply::find($reply_id)->dislikes,
-      //    ]);
-      // }
-      // else increment likes ...
+      if( Like::userAlreadyLiked($user_id, $reply_id) ) { 
+         return response()->json([
+            'dislikes' => Reply::find($reply_id)->dislikes,
+            'status' => 'Not liked, already liked!',
+         ]);
+      }
       $like = new Like([
          "user_id" => $user_id,
          "reply_id" => $reply_id,
@@ -78,6 +73,7 @@ class LikeController extends Controller
       $like->reply->save();
       return response()->json([
          'dislikes' => $nr_of_likes,
+         'status' => 'Liked!',
       ]);
    }
 

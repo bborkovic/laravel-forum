@@ -18,7 +18,7 @@
                   {{$reply->user->name}}
                </div>
                <div class="col-sm-9">
-                  <div class="row">{{$reply->body}}</div>
+                  <div class="row">{!! $reply->body !!}</div>
                </div>
             </div>
          </div>
@@ -60,7 +60,7 @@
          div_id = this.id;
          reply_id = div_id.replace('like_','');
          $.get("/replies/" + reply_id + "/like", function(data, status){
-            console.log('New likes: ' + data.likes);
+            console.log(data.status);
             $('#' + div_id)[0].innerHTML = '<span class="glyphicon glyphicon-thumbs-up">' + data.likes + '</span>';
          });
       });
@@ -70,8 +70,7 @@
          div_id = this.id;
          reply_id = div_id.replace('dislike_','');
          $.get("/replies/" + reply_id + "/dislike", function(data, status){
-            console.log('New dislikes: ' + data.dislikes);
-            console.log(div_id);
+            console.log(data.status);
             $('#' + div_id)[0].innerHTML = '<span class="glyphicon glyphicon-thumbs-up">' + data.dislikes + '</span>';
          });
       });

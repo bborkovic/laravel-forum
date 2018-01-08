@@ -35,7 +35,7 @@
    </table>
 
    {{-- Bla Bla Bla --}}
-   <a href="/replies/create/{{$thread->id}}" class="btn btn-primary" role="button">Reply</a
+<!--    <a href="/replies/create/{{$thread->id}}" class="btn btn-primary" role="button">Reply</a -->
 
 
 @endsection
